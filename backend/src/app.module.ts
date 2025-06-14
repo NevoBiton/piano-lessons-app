@@ -12,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UserModule, // 👈 Add this line
+    UserModule,
   ],
 })
 export class AppModule {}

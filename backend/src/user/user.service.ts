@@ -5,6 +5,7 @@ import { User } from './entity/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from '../auth/types';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -22,7 +23,7 @@ export class UserService {
     const isValid = await bcrypt.compare(dto.password, user.passwordHash);
     if (!isValid) throw new UnauthorizedException('Invalid credentials');
 
-    const payload = { sub: user.id, role: user.role };
+    const payload: JwtPayload = { sub: user.id, role: user.role };
     const token = this.jwtService.sign(payload);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
